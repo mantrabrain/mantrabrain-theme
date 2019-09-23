@@ -121,26 +121,25 @@ var mantrabrain_theme_file_frame;
         },
         repeatorInit: function () {
 
-            $(document).on('click', '.mb-repeator .action-btn', function (e) {
+            $(document).on('click', '.mb-repeator-field .action-btn', function (e) {
 
-
-                var container = $(this).closest('.mb-repeator-container');
+                var container = $(this).closest('.mb-repeator-field-container');
 
                 var number_of_repeator = container.data('repeator-num');
 
-                var len = container.find('.mb-repeator').length;
+                var len = container.find('.mb-repeator-field').length;
 
                 if ($(this).hasClass('add')) {
 
                     if (number_of_repeator > len) {
 
-                        var repeator_tmpl_clone = container.find('.mb-repeator-tmpl').clone();
+                        var repeator_tmpl_clone = container.find('.mb-repeator-field-tmpl').clone();
 
                         var repeator_tmpl_clone_html = repeator_tmpl_clone.html();
 
                         repeator_tmpl_clone_html = repeator_tmpl_clone_html.replace(/__mb_index__/ig, len);
 
-                        container.append('<div class="mb-repeator">' + repeator_tmpl_clone_html + "</div>");
+                        container.append('<div class="mb-repeator-field">' + repeator_tmpl_clone_html + "</div>");
 
                     } else {
                         alert('Maximm repeator exceed');
@@ -150,21 +149,29 @@ var mantrabrain_theme_file_frame;
 
                     if (len > 1) {
 
-                        $(this).closest('.mb-repeator').remove();
+                        $(this).closest('.mb-repeator-field').remove();
                     }
                 }
-                container.find('.mb-repeator:not(:last-child)').find('.action-btn').removeClass('add').addClass('remove');
+                container.find('.mb-repeator-field:not(:last-child)').find('.action-btn').removeClass('add').addClass('remove');
 
                 if (number_of_repeator <= len) {
-                    container.find('.mb-repeator:last-child').find('.action-btn').removeClass('add').addClass('remove');
+                    container.find('.mb-repeator-field:last-child').find('.action-btn').removeClass('add').addClass('remove');
                 } else {
-                    container.find('.mb-repeator:last-child').find('.action-btn').removeClass('remove').addClass('add');
+                    container.find('.mb-repeator-field:last-child').find('.action-btn').removeClass('remove').addClass('add');
 
                 }
 
                 container.find('input').trigger('change');
 
 
+            });
+            $(document).on('click', '.widget-content .mb-repeator-field .toggle-action', function () {
+                var field = $(this).closest('.mb-repeator-field');
+                if (field.hasClass('toggle-on')) {
+                    field.removeClass('toggle-on');
+                } else {
+                    field.addClass('toggle-on');
+                }
             });
         }
     };

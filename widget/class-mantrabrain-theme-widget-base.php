@@ -68,7 +68,8 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
                 case "repeator":
                     $repeator_number = isset($field['repeator_num']) ? absint($field['repeator_num']) : 3;
                     ?>
-                    <div class="mb-repeator-container" data-repeator-num="<?php echo absint($repeator_number); ?>">
+                    <div class="mb-repeator-field-container"
+                         data-repeator-num="<?php echo absint($repeator_number); ?>">
                         <label
                                 for="<?php echo esc_attr($this->get_field_id($field_key)); ?>"><?php echo esc_html($field['title']); ?>
                         </label>
@@ -249,9 +250,7 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
                     <div class="custom_media_preview" style="position:relative;">
 
                         <button type="button" class="button remove"
-                                style="position:absolute;right:0; <?php echo empty($value) ? 'display:none;' : '' ?>">
-                            x
-                        </button>
+                                style="position:absolute;right:0; <?php echo empty($value) ? 'display:none;' : '' ?>">x</button>
                         <img style="<?php echo empty($value) ? 'display:none;' : '' ?>max-width:100%;"
                              class="media_preview_image"
                              src="<?php echo esc_url($value); ?>" alt=""/>
@@ -325,31 +324,34 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
             $repeator_option_keys = array_keys($repeator_options);
             ?>
 
-            <div class="mb-repeator-tmpl">
+            <div class="mb-repeator-field-tmpl">
                 <button type="button" class="action-btn add button button-primary"><i class="dashicons"></i>
                 </button>
-                <?php
+                <button type="button" class="toggle-action button button-primary"><i class="dashicons"></i></button>
+                <div class="mb-repeator-content">
+                    <?php
 
-                $this->description($field);
+                    $this->description($field);
 
 
-                foreach ($repeator_options as $rp_key => $rp_option) {
+                    foreach ($repeator_options as $rp_key => $rp_option) {
 
-                    if (!empty($rp_option['name'])) {
+                        if (!empty($rp_option['name'])) {
 
-                        $rp_option['name'] = $field_key . '[__mb_index__][' . $rp_option['name'] . ']';
+                            $rp_option['name'] = $field_key . '[__mb_index__][' . $rp_option['name'] . ']';
 
+                        }
+                        $rp_field_key = isset($rp_option['name']) ? $rp_option['name'] : '';
+
+                        if (!empty($rp_field_key)) {
+
+                            $this->form_single($rp_field_key, $rp_option, $instance);
+                        }
                     }
-                    $rp_field_key = isset($rp_option['name']) ? $rp_option['name'] : '';
 
-                    if (!empty($rp_field_key)) {
-
-                        $this->form_single($rp_field_key, $rp_option, $instance);
-                    }
-                }
-
-                // Main Content
-                ?>
+                    // Main Content
+                    ?>
+                </div>
 
             </div>
             <?php // Main Content
@@ -358,9 +360,11 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
 
             if (count($value) < 1) {
 
-                echo '<div class="mb-repeator">';
+                echo '<div class="mb-repeator-field">';
 
                 echo '<button type="button" class="action-btn add button button-primary"><i class="dashicons"></i></button>';
+                echo '<button type="button" class="toggle-action button button-primary"><i class="dashicons"></i></button>';
+                echo '<div class="mb-repeator-content">';
 
                 $this->description($field);
 
@@ -381,20 +385,22 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
 
 
                 echo '</div>';
+                echo '</div>';
 
             } else {
 
 
                 foreach ($value as $value_index => $value_content) {
 
-                    echo '<div class="mb-repeator">';
+                    echo '<div class="mb-repeator-field">';
 
                     $class = 'remove';
 
                     $class = count($value) == ($value_index + 1) ? 'add' : $class;
 
                     echo '<button type="button" class="action-btn ' . esc_attr($class) . ' button button-primary"><i class="dashicons"></i></button>';
-
+                    echo '<button type="button" class="toggle-action button button-primary"><i class="dashicons"></i></button>';
+                    echo '<div class="mb-repeator-content">';
                     foreach ($repeator_options as $_single_key => $_option_single) {
 
                         if (!empty($_option_single['name'])) {
@@ -413,6 +419,7 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
                     }
 
 
+                    echo '</div>';
                     echo '</div>';
                 }
             }

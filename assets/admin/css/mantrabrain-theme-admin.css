@@ -1,40 +1,71 @@
-.mb-repeator {
+.widget-content .mb-repeator-field {
     display: block;
-    padding: 10px;
+    padding: 12px 10px;
     border: 1px solid #aaa;
     margin: 5px 0;
     background: #f9f9f9;
     position: relative;
 }
 
-.mb-repeator-tmpl {
+.widget-content .mb-repeator-field-tmpl {
     display: none;
 }
 
-.mb-repeator .action-btn,
-.mb-repeator-tmpl .action-btn {
+.widget-content .mb-repeator-field .action-btn,
+.widget-content .mb-repeator-field-tmpl .action-btn {
     position: absolute;
     top: 0;
     right: 0;
     border-radius: 0;
+    height: auto;
+    line-height: 1em;
+    display: block;
 }
 
-.mb-repeator .action-btn.add .dashicons::before,
-.mb-repeator-tmpl .action-btn.add .dashicons::before {
+.widget-content .mb-repeator-field .toggle-action,
+.widget-content .mb-repeator-field-tmpl .toggle-action {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    height: 23px;
+    width: 23px;
+    /* background: none; */
+    border: none;
+}
+
+.widget-content .mb-repeator-field.toggle-on .mb-repeator-content {
+    display: none;
+}
+
+.widget-content .mb-repeator-field .toggle-action i.dashicons {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+}
+
+.widget-content .mb-repeator-field .toggle-action i.dashicons:after {
+
+    content: "\f142";
+}
+
+.widget-content .mb-repeator-field.toggle-on .toggle-action i.dashicons:after {
+
+    content: "\f140";
+}
+
+.widget-content .mb-repeator-field .action-btn.add .dashicons::before,
+.widget-content .mb-repeator-field-tmpl .action-btn.add .dashicons::before {
     content: "\f132";
 }
 
-.mb-repeator .action-btn.remove .dashicons::before,
-.mb-repeator-tmpl .action-btn.remove .dashicons::before {
+.widget-content .mb-repeator-field .action-btn.remove .dashicons::before,
+.widget-content .mb-repeator-field-tmpl .action-btn.remove .dashicons::before {
     content: "\f158";
 }
 
-.agency-ecommerce-preview-wrap {
-    margin-top: 10px;
-}
+.widget-content .mb-repeator-field .mb-repeator-content {
 
-.agency-ecommerce-preview-wrap img {
-    max-width: 100%;
 }
 
 input.button.button-secondary.btn-image-remove,
