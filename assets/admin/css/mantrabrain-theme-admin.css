@@ -185,11 +185,11 @@ input.select-img.button.button-primary {
     color: #fff;
 }
 
-div[id*="agency-ecommerce"].widget .widget-top {
+div[id*="yatri"].widget .widget-top {
 / / position: relative;
 }
 
-div[id*="agency-ecommerce"].widget .widget-top:after {
+div[id*="yatri"].widget .widget-top:after {
     /* content: '';
      width: 8px;
      height: 100%;
@@ -198,7 +198,7 @@ div[id*="agency-ecommerce"].widget .widget-top:after {
      top: 0;*/
 }
 
-div[id*="agency-ecommerce"].widget h3 {
+div[id*="yatri"].widget h3 {
 
     /* background: #d2cbfd;
      color: #000;*/

@@ -77,7 +77,7 @@ if (!class_exists('Mantrabrain_Theme_Widget_Validation')) {
                     break;
 
                 case 'color':
-                    $updated_value = sanitize_hex_color($field_value);
+                    $updated_value = Mantrabrain_Theme_Helper::sanitize_color($field_value);
                     break;
                 // Allow some tags in textareas
                 case 'textarea':

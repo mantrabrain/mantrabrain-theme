@@ -643,5 +643,444 @@ if (!class_exists('Mantrabrain_Theme_Helper')) {
                 'fa-font-awesome' => 'f2b4'
             );
         }
+
+        static function all_font_varients($font_name = '')
+        {
+            $varients = array(
+
+                '' => __('Default', 'yatri'),
+                'normal' => __('Normal', 'yatri'),
+                'bold' => __('Bold', 'yatri'),
+                '100' => __('100', 'yatri'),
+                '200' => __('200', 'yatri'),
+                '300' => __('Light 300', 'yatri'),
+                '400' => __('Normal 400', 'yatri'),
+                '500' => __('Medium 500', 'yatri'),
+                '600' => __('Semi-Bold 600', 'yatri'),
+                '700' => __('Bold 700', 'yatri'),
+                '800' => __('Extra-Bold 800', 'yatri'),
+                '900' => __('Ultra-Bold 900', 'yatri'),
+
+            );
+
+            if (!empty($font_name)) {
+
+                $google_fonts = (self::get_google_fonts());
+
+                $font_varient = array();
+
+                if (isset($google_fonts[$font_name])) {
+
+                    $all_varients = isset($google_fonts[$font_name]['variants']) ? $google_fonts[$font_name]['variants'] : array();
+
+
+                    foreach ($all_varients as $varient) {
+
+                        $font_varient[$varient] = $varient;
+                    }
+                    return (apply_filters('yatri_all_font_varients', $font_varient));
+
+                }
+            }
+
+            return (apply_filters('yatri_all_font_varients', $varients));
+        }
+
+        static function all_fonts()
+        {
+            $fonts = array(
+                'normal' => array(
+                    'title' => __('Default Web Fonts', 'yatri'),
+                    'fonts' => self::get_normal_fonts(),
+                ),
+                'google' => array(
+                    'title' => __('Google Web Fonts', 'yatri'),
+                    'fonts' => self::get_google_fonts(),
+                ),
+            );
+
+            return (apply_filters('yatri_all_fonts', $fonts));
+        }
+
+        static function get_google_fonts()
+        {
+            $file = get_template_directory() . '/mantrabrain-theme/assets/fonts/google-fonts.json';
+            if (file_exists($file)) {
+                $file_contents = file_get_contents($file);
+
+                return json_decode($file_contents, true);
+            }
+
+            return array();
+        }
+
+        static function get_normal_fonts()
+        {
+            $fonts = array(
+                'Arial' => array(
+                    'family' => 'Arial',
+                    'category' => ' sans-serif',
+                ),
+                'Baskerville' => array(
+                    'family' => 'Baskerville',
+                    'category' => 'serif',
+                ),
+                'Palatino' => array(
+                    'family' => 'Palatino',
+                    'category' => 'serif',
+                ),
+
+                'Bodoni MT' => array(
+                    'family' => 'Bodoni MT',
+                    'category' => 'serif',
+                ),
+
+                'Georgia' => array(
+                    'family' => 'Georgia',
+                    'category' => 'serif',
+                ),
+
+                'Century Gothic' => array(
+                    'family' => 'Century Gothic',
+                    'category' => 'sans-serif',
+                ),
+
+                'Tahoma' => array(
+                    'family' => 'Tahoma',
+                    'category' => 'sans-serif',
+                ),
+
+                'Arial Narrow' => array(
+                    'family' => 'Arial Narrow',
+                    'category' => ' sans-serif',
+                ),
+
+                'Trebuchet MS' => array(
+                    'family' => 'Trebuchet MS',
+                    'category' => ' sans-serif',
+                ),
+
+                'Consolas' => array(
+                    'family' => 'Consolas',
+                    'category' => ' sans-serif',
+                ),
+
+            );
+
+            return $fonts;
+        }
+
+        static function css_units()
+        {
+            return apply_filters('yatri_css_units', array(
+                'px' => __('px', 'yatri'),
+                'rem' => __('rem', 'yatri'),
+                'em' => __('em', 'yatri'),
+                '%' => __('%', 'yatri'),
+            ));
+        }
+
+        static function css_image_sizes()
+        {
+            return apply_filters('yatri_css_image_sizes', array(
+                '' => __('Default', 'yatri'),
+                'auto' => __('Auto', 'yatri'),
+                'cover' => __('Cover', 'yatri'),
+                'contain' => __('Contain', 'yatri'),
+            ));
+        }
+
+        public static function css_image_positions()
+        {
+            return apply_filters('yatri_css_image_positions', array(
+                '' => __('Default', 'yatri'),
+                'center' => __('Center', 'yatri'),
+                'top left' => __('Top Left', 'yatri'),
+                'top right' => __('Top Right', 'yatri'),
+                'top center' => __('Top Center', 'yatri'),
+                'bottom left' => __('Bottom Left', 'yatri'),
+                'bottom center' => __('Bottom Center', 'yatri'),
+                'bottom right' => __('Bottom Right', 'yatri'),
+            ));
+        }
+
+        public static function css_image_repeats()
+        {
+            return apply_filters('yatri_css_image_sizes', array(
+                'repeat' => __('Default', 'yatri'),
+                'no-repeat' => __('No repeat', 'yatri'),
+                'repeat-x' => __('Repeat horizontal', 'yatri'),
+                'repeat-y' => __('Repeat vertical', 'yatri'),
+            ));
+        }
+
+        public static function css_image_parallax_styles()
+        {
+            return apply_filters('yatri_css_image_parallax_styles', array(
+                '' => __('Default', 'yatri'),
+                'scroll' => __('Scroll', 'yatri'),
+                'fixed' => __('Fixed', 'yatri'),
+            ));
+        }
+
+        public static function css_border_styles()
+        {
+            return apply_filters('yatri_css_border_styles', array(
+                '' => __('Default', 'yatri'),
+                'none' => __('None', 'yatri'),
+                'solid' => __('Solid', 'yatri'),
+                'dotted' => __('Dotted', 'yatri'),
+                'dashed' => __('Dashed', 'yatri'),
+                'double' => __('Double', 'yatri'),
+                'ridge' => __('Ridge', 'yatri'),
+                'inset' => __('Inset', 'yatri'),
+                'outset' => __('Outset', 'yatri'),
+            ));
+        }
+
+        public static function css_font_style()
+        {
+            return array(
+                '' => __('Default', 'yatri'),
+                'normal' => __('Normal', 'yatri'),
+                'italic' => __('Italic', 'yatri'),
+                'oblique' => __('Oblique', 'yatri'),
+
+            );
+
+        }
+
+        public static function css_text_decoration()
+        {
+            return array(
+                '' => __('Default', 'yatri'),
+                'underline' => __('Underline', 'yatri'),
+                'overline' => __('Overline', 'yatri'),
+                'line-through' => __('Line through', 'yatri'),
+                'none' => __('None', 'yatri'),
+
+            );
+        }
+
+        public static function css_text_transform()
+        {
+            return array(
+                '' => __('Default', 'yatri'),
+                'uppercase' => __('Uppercase', 'yatri'),
+                'lowercase' => __('Lowercase', 'yatri'),
+                'capitalize' => __('Capitalize', 'yatri'),
+                'none' => __('None', 'yatri'),
+
+            );
+        }
+
+        public static function all_font_subsets($font_name = '')
+        {
+            $subsets = array();
+
+            if (!empty($font_name)) {
+
+                $google_fonts = (self::get_google_fonts());
+
+                if (isset($google_fonts[$font_name])) {
+
+                    $all_subsets = isset($google_fonts[$font_name]['subsets']) ? $google_fonts[$font_name]['subsets'] : array();
+
+
+                    foreach ($all_subsets as $subset) {
+
+                        $subsets[$subset] = $subset;
+                    }
+                    return (apply_filters('yatri_all_font_subsets', $subsets));
+
+                }
+            }
+            return (apply_filters('yatri_all_font_subsets', $subsets));
+        }
+
+        static function media_query()
+        {
+            return array(
+                'all' => '{{query}}',
+                'desktop' => '@media screen and (min-width: 1025px) { {{query}} }',
+                'tablet' => '@media screen and (min-width: 569px) and (max-width: 1024px) { {{query}} }',
+                'mobile' => '@media screen and (max-width: 568px) { {{query}} }',
+            );
+        }
+
+        static function sanitize_color($color)
+        {
+            if (empty($color) || is_array($color)) {
+                return '';
+            }
+
+            // If string does not start with 'rgba', then treat as hex.
+            // sanitize the hex color and finally convert hex to rgba.
+            if (false === strpos($color, 'rgba')) {
+                return sanitize_hex_color($color);
+            }
+
+            // By now we know the string is formatted as an rgba color so we need to further sanitize it.
+            $color = str_replace(' ', '', $color);
+            sscanf($color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha);
+
+            return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+        }
+
+        static function sanitize_modal($input, $setting)
+        {
+            $input_array = array();
+
+            $setting_id = $setting->id;
+
+            $setting_id = str_replace(YATRI_THEME_SETTINGS, '', $setting_id);
+
+            $setting_id = trim(str_replace(array('[', ']'), '', $setting_id));
+
+            $all_field_from_modal = yatri_customizer_modal_all_fields($setting_id);
+
+            $all_field_value = array();
+            try {
+
+                $all_field_value = json_decode($input, true);
+
+            } catch (Exception $e) {
+
+            }
+
+            foreach ($all_field_from_modal as $field) {
+
+                $field_type = isset($field['type']) ? $field['type'] : '';
+
+                $field_name = isset($field['name']) ? $field['name'] : '';
+
+                $devices = isset($field['devices']) ? $field['devices'] : array();
+
+                $field_value = isset($all_field_value[$field_name]) ? $all_field_value[$field_name] : array();
+
+                if ($field_type !== 'heading') {
+
+                    $input_array[$field_name] = self::get_modal_value($field_type, $field_name, $field_value, $devices);
+
+
+                }
+
+            }
+            return json_encode($input_array);
+
+        }
+
+        static function get_modal_value($field_type, $field_name, $field_value, $devices)
+        {
+
+            $single_value = array();
+
+            foreach ($devices as $device) {
+
+                $field_val = isset($field_value[$device]) ? $field_value[$device] : array();
+
+                $single_value[$device] = self::get_modal_value($field_type, $field_name, $field_val, array());
+            }
+
+
+            if (count($devices) < 1) {
+
+                switch ($field_type) {
+                    case "image":
+                        $valid_value = isset($field_value['value']) ? ($field_value['value']) : '';
+                        $valid_value['attachment_id'] = isset($valid_value['attachment_id']) ? absint($valid_value['attachment_id']) : '';
+                        $valid_value['attachment_url'] = isset($valid_value['attachment_url']) ? esc_url_raw($valid_value['attachment_url']) : '';
+                        $valid_value['attachment_mime'] = isset($valid_value['attachment_mime']) ? sanitize_text_field($valid_value['attachment_mime']) : '';
+                        $valid_value['image_size'] = isset($valid_value['image_size']) ? sanitize_text_field($valid_value['image_size']) : '';
+                        $valid_value['image_position'] = isset($valid_value['image_position']) ? sanitize_text_field($valid_value['image_position']) : '';
+                        $valid_value['image_repeat'] = isset($valid_value['image_repeat']) ? sanitize_text_field($valid_value['image_repeat']) : '';
+                        $valid_value['parallax_image'] = isset($valid_value['parallax_image']) ? sanitize_text_field($valid_value['parallax_image']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "border":
+                        $valid_value = isset($field_value['value']) ? ($field_value['value']) : '';
+                        $valid_value['style'] = isset($valid_value['style']) ? sanitize_text_field($valid_value['style']) : '';
+                        $valid_value['border_top'] = isset($valid_value['border_top']) ? absint($valid_value['border_top']) : '';
+                        $valid_value['border_right'] = isset($valid_value['border_right']) ? absint($valid_value['border_right']) : '';
+                        $valid_value['border_bottom'] = isset($valid_value['border_bottom']) ? absint($valid_value['border_bottom']) : '';
+                        $valid_value['border_left'] = isset($valid_value['border_left']) ? absint($valid_value['border_left']) : '';
+                        $valid_value['border_color'] = isset($valid_value['border_color']) ? self::sanitize_color($valid_value['border_color']) : '';
+                        $valid_value['border_radius_top'] = isset($valid_value['border_radius_top']) ? absint($valid_value['border_radius_top']) : '';
+                        $valid_value['border_radius_right'] = isset($valid_value['border_radius_right']) ? absint($valid_value['border_radius_right']) : '';
+                        $valid_value['border_radius_bottom'] = isset($valid_value['border_radius_bottom']) ? absint($valid_value['border_radius_bottom']) : '';
+                        $valid_value['border_radius_left'] = isset($valid_value['border_radius_left']) ? absint($valid_value['border_radius_left']) : '';
+                        $valid_value['box_shadow_color'] = isset($valid_value['box_shadow_color']) ? self::sanitize_color($valid_value['box_shadow_color']) : '';
+                        $valid_value['box_shadow_x'] = isset($valid_value['box_shadow_x']) ? absint($valid_value['box_shadow_x']) : '';
+                        $valid_value['box_shadow_y'] = isset($valid_value['box_shadow_y']) ? absint($valid_value['box_shadow_y']) : '';
+                        $valid_value['box_shadow_blur'] = isset($valid_value['box_shadow_blur']) ? absint($valid_value['box_shadow_blur']) : '';
+                        $valid_value['box_shadow_spread'] = isset($valid_value['box_shadow_spread']) ? absint($valid_value['box_shadow_spread']) : '';
+                        $valid_value['box_shadow_inset'] = isset($valid_value['box_shadow_inset']) ? absint($valid_value['box_shadow_inset']) : 0;
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "color":
+                        $valid_value = isset($field_value['value']) ? self::sanitize_color($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "overlay":
+                        $valid_value = isset($field_value['value']) ? self::sanitize_color($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "alignment":
+                        $valid_value = isset($field_value['value']) ? sanitize_text_field($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "number":
+                        $valid_value = isset($field_value['value']) ? absint($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "font":
+                    case "select":
+                    case "font_weight":
+                    case "text":
+                        $valid_value = isset($field_value['value']) ? sanitize_text_field($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "checkbox":
+                        $valid_value = isset($field_value['value']) ? ($field_value['value']) : array();
+
+                        if (is_array($valid_value)) {
+
+                            foreach ($valid_value as $val_index => $val) {
+
+                                $valid_value[$val_index] = sanitize_text_field($val);
+                            }
+
+                        } else {
+                            $valid_value = array();
+                        }
+
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "range":
+                        $valid_value['value'] = isset($field_value['value']['value']) ? absint($field_value['value']['value']) : '';
+                        $valid_value['unit'] = isset($field_value['value']['unit']) ? sanitize_text_field($field_value['value']['unit']) : 'px';
+                        $single_value['value'] = $valid_value;
+                        break;
+                    case "padding":
+                    case "margin":
+
+                        foreach (array('top', 'right', 'bottom', 'left') as $position) {
+                            $valid_value[$position]['value'] = isset($field_value[$position]['value']) ? absint($field_value[$position]['value']) : '';
+                            $valid_value[$position]['unit'] = isset($field_value[$position]['unit']) ? sanitize_text_field($field_value[$position]['unit']) : 'px';
+                        }
+                        $single_value = $valid_value;
+                        break;
+                    default:
+                        $valid_value = isset($field_value['value']) ? sanitize_text_field($field_value['value']) : '';
+                        $single_value['value'] = $valid_value;
+                        break;
+
+                }
+            }
+
+
+            return $single_value;
+        }
     }
+
 }
