@@ -62,7 +62,7 @@ class Mantrabrain_Theme_Customizer_Control_Sortable extends Mantrabrain_Theme_Cu
                             <div class="yatri-sortable-item-heading">
                                 <label class="yatri-sortable-show" title="Toggle item show">
                                     <span class="rp-show-icon dashicons dashicons-visibility"></span>
-                                    <span class="screen-reader-text"><?php echo __('Show', 'yatri'); ?></span></label>
+                                    <span class="screen-reader-text"><?php echo esc_html__('Show', 'yatri'); ?></span></label>
                                 <span class="yatri-sortable-title"><?php echo esc_html($text); ?></span>
 
                             </div>

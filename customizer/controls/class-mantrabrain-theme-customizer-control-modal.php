@@ -261,7 +261,7 @@ class Mantrabrain_Theme_Customizer_Control_Modal extends Mantrabrain_Theme_Custo
             ?>
             <div class="yatri--group-field ft--<?php echo esc_attr($type);
             echo $is_multiple_device ? ' yatri--multiple-devices ' : ' ';
-            echo $additional_class; ?>"
+            echo esc_attr($additional_class); ?>"
                  data-field-name="<?php echo esc_attr($field_name); ?>">
 
 

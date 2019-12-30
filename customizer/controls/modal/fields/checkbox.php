@@ -13,7 +13,7 @@
             <p><label><input
                             <?php echo in_array($choice_key, $select_value) ? 'checked="checked"':''; ?>
                             data-field-key="value" type="checkbox" class="yatri-typo-input yatri-change-by-js"
-                             name="<?php echo esc_attr($field_name) . '_' . $choice_index ?>"
+                             name="<?php echo esc_attr($field_name) . '_' . absint($choice_index) ?>"
                              value="<?php echo esc_attr($choice_key) ?>"><?php echo esc_html($choice) ?></label></p>
         <?php
             $choice_index++;

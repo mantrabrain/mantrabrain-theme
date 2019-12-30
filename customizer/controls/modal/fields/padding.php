@@ -24,21 +24,21 @@
 		<span>
 					<input type="number" data-field-key="top" class="yatri-input-css yatri-change-by-js padding_top"
                            value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['top']['value']) : ''; ?>"/>
-					<span class="yatri--small-label"><?php echo __('Top', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Top', 'yatri'); ?></span>
 		</span>
         <span>
         <input type="number" data-field-key="right" class="yatri-input-css yatri-change-by-js padding_right" value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['right']['value']) : ''; ?>"/>
-					<span class="yatri--small-label"><?php echo __('Right', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Right', 'yatri'); ?></span>
 				</span>
         <span>
 					<input type="number" data-field-key="bottom"
                            class="yatri-input-css yatri-change-by-js padding_bottom" value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['bottom']['value']) : ''; ?>"/>
-					<span class="yatri--small-label"><?php echo __('Bottom', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Bottom', 'yatri'); ?></span>
 				</span>
         <span>
 					<input type="number" data-field-key="left" class="yatri-input-css yatri-change-by-js padding_left"
                            value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['left']['value']) : ''; ?>"/>
-					<span class="yatri--small-label"><?php echo __('Left', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Left', 'yatri'); ?></span>
         </span>
         <label
                 class="yatri--css-ruler-link  yatri--label-active">

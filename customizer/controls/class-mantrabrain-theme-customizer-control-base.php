@@ -34,15 +34,15 @@ class Mantrabrain_Theme_Customizer_Control_Base extends WP_Customize_Control
         <div class="devices yatri-devices">
             <button type="button" class="preview-desktop active" aria-pressed="true"
                     data-device="desktop">
-                <span class="screen-reader-text"><?php echo __('Enter desktop preview mode', 'yatri'); ?></span>
+                <span class="screen-reader-text"><?php echo esc_html__('Enter desktop preview mode', 'yatri'); ?></span>
             </button>
             <button type="button" class="preview-tablet" aria-pressed="false"
                     data-device="tablet">
-                <span class="screen-reader-text"><?php echo __('Enter tablet preview mode', 'yatri'); ?></span>
+                <span class="screen-reader-text"><?php echo esc_html__('Enter tablet preview mode', 'yatri'); ?></span>
             </button>
             <button type="button" class="preview-mobile" aria-pressed="false"
                     data-device="mobile">
-                <span class="screen-reader-text"><?php echo __('Enter mobile preview mode', 'yatri'); ?></span>
+                <span class="screen-reader-text"><?php echo esc_html__('Enter mobile preview mode', 'yatri'); ?></span>
             </button>
         </div>
         <?php

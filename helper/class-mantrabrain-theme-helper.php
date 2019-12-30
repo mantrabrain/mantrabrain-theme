@@ -704,15 +704,10 @@ if (!class_exists('Mantrabrain_Theme_Helper')) {
 
         static function get_google_fonts()
         {
-            $file = get_template_directory() . '/mantrabrain-theme/assets/fonts/google-fonts.json';
-            if (file_exists($file)) {
-                $file_contents = file_get_contents($file);
 
-                return json_decode($file_contents, true);
-            }
-
-            return array();
+            return Mantrabrain_Theme_Helper_Google_Fonts::get_all();
         }
+
 
         static function get_normal_fonts()
         {

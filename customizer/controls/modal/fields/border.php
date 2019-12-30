@@ -7,7 +7,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Border Style</label>
+                <label class="customize-control-title"><?php echo esc_html__('Border Style', 'yatri'); ?></label>
             </div>
 
 
@@ -28,7 +28,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Border Width</label>
+                <label class="customize-control-title"><?php echo esc_html__('Border Width', 'yatri'); ?></label>
             </div>
 
 
@@ -37,23 +37,23 @@
 				<span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_top"
                            value="<?php echo isset($border_value['border_top']) ? absint($border_value['border_top']) : '' ?>"/>
-					<span class="yatri--small-label"><?php echo __('Top', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Top', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_right"
                            value="<?php echo isset($border_value['border_right']) ? absint($border_value['border_right']) : '' ?>"/>
-					<span class="yatri--small-label"><?php echo __('Right', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Right', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_bottom"
                            value="<?php echo isset($border_value['border_bottom']) ? absint($border_value['border_bottom']) : '' ?>"/>
-					<span class="yatri--small-label"><?php echo __('Bottom', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Bottom', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_left"
                            value="<?php echo isset($border_value['border_left']) ? absint($border_value['border_left']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('Left', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Left', 'yatri'); ?></span>
 				</span>
             <label title="Toggle values together"
                    class="yatri--css-ruler-link  yatri--label-active">
@@ -68,7 +68,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Border Color</label>
+                <label class="customize-control-title"><?php echo esc_html__('Border Color', 'yatri'); ?></label>
             </div>
 
 
@@ -80,7 +80,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Border Radius</label>
+                <label class="customize-control-title"><?php echo esc_html__('Border Radius', 'yatri'); ?></label>
             </div>
 
 
@@ -90,24 +90,24 @@
 					<input type="number" class="yatri-input-css yatri-change-by-js border_radius_top"
                            value="<?php echo isset($border_value['border_radius_top']) ? absint($border_value['border_radius_top']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('Top', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Top', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_radius_right"
                            value="<?php echo isset($border_value['border_radius_right']) ? absint($border_value['border_radius_right']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('Right', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Right', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_radius_bottom"
                            value="<?php echo isset($border_value['border_radius_bottom']) ? absint($border_value['border_radius_bottom']) : '' ?>"/>
-					<span class="yatri--small-label"><?php echo __('Bottom', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Bottom', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js border_radius_left"
                            value="<?php echo isset($border_value['border_radius_left']) ? absint($border_value['border_radius_left']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('Left', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Left', 'yatri'); ?></span>
 				</span>
             <label title="Toggle values together"
                    class="yatri--css-ruler-link  yatri--label-active">
@@ -122,7 +122,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Box Shadow</label>
+                <label class="customize-control-title"><?php echo esc_html__('Box Shadow', 'yatri'); ?></label>
             </div>
 
 
@@ -134,7 +134,7 @@
         <div class="yatri-field-header">
 
             <div class="yatri-field-heading">
-                <label class="customize-control-title">Box Size Values</label>
+                <label class="customize-control-title"><?php echo esc_html__('Box Size Values', 'yatri'); ?></label>
             </div>
 
 
@@ -144,24 +144,24 @@
 					<input type="number" class="yatri-input-css yatri-change-by-js box_shadow_x"
                            value="<?php echo isset($border_value['box_shadow_x']) ? absint($border_value['box_shadow_x']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('X', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('X', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js box_shadow_y"
                            value="<?php echo isset($border_value['box_shadow_y']) ? absint($border_value['box_shadow_y']) : '' ?>"/>
-					<span class="yatri--small-label"><?php echo __('Y', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('Y', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js box_shadow_blur"
                            value="<?php echo isset($border_value['box_shadow_blur']) ? absint($border_value['box_shadow_blur']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('BLUR', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('BLUR', 'yatri'); ?></span>
 				</span>
             <span>
 					<input type="number" class="yatri-input-css yatri-change-by-js box_shadow_spread"
                            value="<?php echo isset($border_value['box_shadow_spread']) ? absint($border_value['box_shadow_spread']) : '' ?>"
                     />
-					<span class="yatri--small-label"><?php echo __('SPREAD', 'yatri'); ?></span>
+					<span class="yatri--small-label"><?php echo esc_html__('SPREAD', 'yatri'); ?></span>
 				</span>
             <span>
 						<span class="input yatri--checked">
@@ -169,7 +169,7 @@
                                     type="checkbox" class="yatri-input-css yatri-change-by-js box_shadow_inset"
                                     value="">
 						</span>
-						<span class="yatri--small-label">inset</span>
+						<span class="yatri--small-label"><?php echo esc_html__('inset', 'yatri'); ?></span>
 					</span>
         </div>
     </div>

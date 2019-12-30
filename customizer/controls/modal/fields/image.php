@@ -23,7 +23,7 @@
             <button type="button" class="button yatri--change <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">Change</button>
             <button type="button" class="button yatri--remove <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">Remove</button>
         </div>
-        <div class="yatri-image-properties <?php echo absint(@$image_value['attachment_id']) > 0 ? '' : 'yatri-hide'; ?>">
+        <div class="yatri-image-properties <?php echo !empty($image_value['attachment_id']) && absint($image_value['attachment_id']) > 0 ? '' : 'yatri-hide'; ?>">
             <div class="yatri-half">
                 <div class="yatri-field-item">
                     <div class="yatri-field-heading">
