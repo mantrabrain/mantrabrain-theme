@@ -1076,6 +1076,45 @@ if (!class_exists('Mantrabrain_Theme_Helper')) {
 
             return $single_value;
         }
+
+        static function sanitize_builder($input, $setting)
+        {
+            $all_valid_fields = array();
+
+            $fields = ($setting->manager->get_control($setting->id)->fields);
+
+            $field_keys = array_keys($fields);
+
+            try {
+
+                $all_field_value = json_decode($input, true);
+
+            } catch (Exception $e) {
+
+            }
+            foreach ($all_field_value as $field_array) {
+
+                $section = isset($field_array['section']) ? sanitize_text_field($field_array['section']) : '';
+
+                $section = in_array($section, $field_keys) ? $section : '';
+
+                $width = isset($field_array['width']) ? sanitize_text_field($field_array['width']) : '';
+
+                $all_valid_fields[] = array(
+                    'section' => $section,
+                    'width' => $width
+                );
+
+
+            }
+
+            if (count($all_field_value) == 3) {
+
+                return $all_valid_fields;
+            }
+            return $setting->default;
+
+        }
     }
 
 }
