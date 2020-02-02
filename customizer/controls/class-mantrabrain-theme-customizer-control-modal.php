@@ -104,9 +104,7 @@ class Mantrabrain_Theme_Customizer_Control_Modal extends Mantrabrain_Theme_Custo
 
         $js_uri = YATRI_THEME_URI . 'mantrabrain-theme/customizer/controls/modal/';
 
-        wp_enqueue_script('yatri-alpha-color-picker-js', $js_uri . 'wp-alpha-colorpicker.js', array('jquery'), YATRI_THEME_VERSION, true);
-
-        wp_enqueue_script('yatri-modal-control-js', $js_uri . 'modal.js', array('jquery'), YATRI_THEME_VERSION, true);
+        wp_enqueue_script('yatri-modal-control-js', $js_uri . 'modal.js', array('yatri-color-alpha'), YATRI_THEME_VERSION, true);
 
         wp_enqueue_style('yatri-modal-control-css', $js_uri . 'modal.css', array(), YATRI_THEME_VERSION);
 
@@ -256,13 +254,34 @@ class Mantrabrain_Theme_Customizer_Control_Modal extends Mantrabrain_Theme_Custo
             if ($type == 'checkbox' && $field_name == 'font_languages' && empty($field['choices'])) {
                 $additional_class .= ' yatri-hide ';
             }
-
+            $additional_css = isset($field['additional_css']) ? ($field['additional_css']) : '';
+            $additional_css_mobile = '';
+            $additional_css_tablet = '';
+            $additional_css_desktop = '';
+            $additional_css_all = '';
+            if (is_array($additional_css)) {
+                $additional_css_tablet = isset($additional_css['tablet']) ? $additional_css['tablet'] : '';
+                $additional_css_mobile = isset($additional_css['mobile']) ? $additional_css['mobile'] : '';
+                $additional_css_desktop = isset($additional_css['desktop']) ? $additional_css['desktop'] : '';
+            } else {
+                $additional_css_all = $additional_css;
+            }
+            $selector = isset($field['selector']) ? ($field['selector']) : "";
+            $css_property = isset($field['css_property']) ? ($field['css_property']) : "";
 
             ?>
             <div class="yatri--group-field ft--<?php echo esc_attr($type);
             echo $is_multiple_device ? ' yatri--multiple-devices ' : ' ';
             echo esc_attr($additional_class); ?>"
-                 data-field-name="<?php echo esc_attr($field_name); ?>">
+                 data-field-name="<?php echo esc_attr($field_name); ?>"
+                 data-field-id="<?php echo esc_attr($field_name); ?>"
+                 data-field-selector="<?php echo esc_attr($selector); ?>"
+                 data-field-additional-css-mobile='<?php echo esc_attr($additional_css_mobile); ?>'
+                 data-field-additional-css-tablet='<?php echo esc_attr($additional_css_tablet); ?>'
+                 data-field-additional-css-desktop='<?php echo esc_attr($additional_css_desktop); ?>'
+                 data-field-additional-css-all='<?php echo esc_attr($additional_css_all); ?>'
+                 data-field-css-property="<?php echo esc_attr($css_property); ?>"
+            >
 
 
                 <div class="yatri-field-header">
@@ -276,7 +295,7 @@ class Mantrabrain_Theme_Customizer_Control_Modal extends Mantrabrain_Theme_Custo
 
                             <?php
                             if ($is_multiple_device) {
-                                $this->device_selector();
+                                $this->device_selector($devices);
                             }
 
                         } ?>
@@ -347,9 +366,31 @@ class Mantrabrain_Theme_Customizer_Control_Modal extends Mantrabrain_Theme_Custo
 
         $device_attr = $device ? 'data-device="' . esc_attr($device) . '"' : '';
 
-        $default_value = isset($field['default']) ? $field['default'] : '';
+        if ($device) {
+
+            $default_value = isset($field['default']) && isset($field['default'][$device]) ? $field['default'][$device] : '';
+        } else {
+
+            $default_value = isset($field['default']) ? $field['default'] : '';
+        }
+
 
         $field_value = $this->get_field_value($field_name, $default_value, $device, $field_type);
+
+        $disabled_fields = array();
+
+        if (isset($field['disabled_fields'])) {
+
+            $disabled_fields = $device && isset($field['disabled_fields'][$device]) ? $field['disabled_fields'][$device] : $field['disabled_fields'];
+        }
+
+        $extra_value_attributes = array();
+
+        if (isset($field['extra_value_attributes'])) {
+
+            $extra_value_attributes = $device && isset($field['extra_value_attributes'][$device]) ? $field['extra_value_attributes'][$device] : $field['extra_value_attributes'];
+        }
+
 
         if ($field_type == 'heading') {
             return;

@@ -101,7 +101,7 @@ class Mantrabrain_Theme_Customizer_Control_Repeater extends Mantrabrain_Theme_Cu
         $value_array = array();
 
         try {
-            $value_array = is_string($field_value) ? json_decode($field_value, true) : $field_value;
+            $value_array = yatri_maybe_json_decode($field_value);
 
         } catch (Exception $e) {
 

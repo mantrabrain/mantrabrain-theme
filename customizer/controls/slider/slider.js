@@ -69,7 +69,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
+
         yatriSliderControl.init();
 
     })

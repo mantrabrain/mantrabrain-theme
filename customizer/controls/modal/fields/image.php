@@ -19,15 +19,24 @@
                     <img src="<?php echo esc_url($image_value['attachment_url']); ?>" alt="">
                 <?php } ?>
             </div>
-            <button type="button" class="button yatri--add <?php echo !empty($image_value['attachment_url']) ? 'yatri--hide' : ''; ?>">Add</button>
-            <button type="button" class="button yatri--change <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">Change</button>
-            <button type="button" class="button yatri--remove <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">Remove</button>
+            <button type="button"
+                    class="button yatri--add <?php echo !empty($image_value['attachment_url']) ? 'yatri--hide' : ''; ?>">
+                <?php esc_html_e('Add Image', 'yatri'); ?>
+            </button>
+            <button type="button"
+                    class="button yatri--change <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">
+                <?php esc_html_e('Change', 'yatri'); ?>
+            </button>
+            <button type="button"
+                    class="button yatri--remove <?php echo !empty($image_value['attachment_url']) ? '' : 'yatri--hide'; ?>">
+                <?php esc_html_e('Remove', 'yatri'); ?>
+            </button>
         </div>
         <div class="yatri-image-properties <?php echo !empty($image_value['attachment_id']) && absint($image_value['attachment_id']) > 0 ? '' : 'yatri-hide'; ?>">
             <div class="yatri-half">
                 <div class="yatri-field-item">
                     <div class="yatri-field-heading">
-                        <label class="customize-control-title">Size</label>
+                        <label class="customize-control-title"><?php esc_html_e('Size', 'yatri'); ?></label>
                     </div>
                     <?php $css_image_size = Mantrabrain_Theme_Helper::css_image_sizes(); ?>
                     <select class="yatri-change-by-js image_size">
@@ -43,7 +52,7 @@
             <div class="yatri-half">
                 <div class="yatri-field-item">
                     <div class="yatri-field-heading">
-                        <label class="customize-control-title">Position</label>
+                        <label class="customize-control-title"><?php esc_html_e('Position', 'yatri'); ?></label>
                     </div>
                     <?php $css_image_positions = Mantrabrain_Theme_Helper::css_image_positions(); ?>
                     <select class="yatri-change-by-js image_position">
@@ -59,7 +68,7 @@
             <div class="yatri-half">
                 <div class="yatri-field-item">
                     <div class="yatri-field-heading">
-                        <label class="customize-control-title">Repeat</label>
+                        <label class="customize-control-title"><?php esc_html_e('Repeat', 'yatri'); ?></label>
                     </div>
                     <?php $css_image_repeat = Mantrabrain_Theme_Helper::css_image_repeats(); ?>
                     <select class="yatri-change-by-js image_repeat">
@@ -75,7 +84,7 @@
             <div class="yatri-half">
                 <div class="yatri-field-item">
                     <div class="yatri-field-heading">
-                        <label class="customize-control-title">Attachment</label>
+                        <label class="customize-control-title"><?php esc_html_e('Attachment', 'yatri'); ?></label>
                     </div>
                     <?php $css_image_parallax_styles = Mantrabrain_Theme_Helper::css_image_parallax_styles(); ?>
 

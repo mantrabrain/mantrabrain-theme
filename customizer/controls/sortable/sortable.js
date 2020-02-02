@@ -68,7 +68,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
+
         yatriSortableControl.init();
 
     })

@@ -92,6 +92,7 @@ class Mantrabrain_Lib_Autoloader
 
 
         if (0 === strpos($class, 'mantrabrain_theme_customizer_control')) {
+
             $path = $this->include_path . 'customizer/controls/';
         } else if (0 === strpos($class, 'mantrabrain_theme_customizer')) {
             $path = $this->include_path . 'customizer/';
@@ -106,7 +107,7 @@ class Mantrabrain_Lib_Autoloader
             //Mantrabrain_Theme_Breadcrumbs
             $path = $this->include_path . 'hooks/';
         }
-         if (empty($path) || !$this->load_file($path . $file)) {
+        if (empty($path) || !$this->load_file($path . $file)) {
             $this->load_file($this->include_path . $file);
         }
     }

@@ -9,7 +9,7 @@
     <?php $all_fonts = Mantrabrain_Theme_Helper::all_fonts(); ?>
     <select class="yatri-typo-input yatri-select2 yatri-change-by-js" data-field-key="value"
             data-mapping-fields='<?php echo json_encode($mapping_fields) ?>'>
-        <option data-subsets="{}" data-varient="{}"
+        <option data-default="yes" data-subsets="{}" data-varient="{}"
                 value=""><?php echo esc_html__('Theme Default', 'yatri'); ?></option>
         <?php foreach ($all_fonts as $font_group_id => $font_list) { ?>
             <optgroup label="<?php echo esc_attr($font_list['title']); ?>">

@@ -5,7 +5,7 @@ li.customize-control .action--reset {
 }
 
 li.customize-control.yatri-open .action--reset {
-    display: none;
+    display: inline-block;
 }
 
 li.customize-control.yatri-open .yatri-modal-settings {
@@ -163,6 +163,11 @@ li.customize-control.yatri-open .yatri-actions .action--edit span.dashicons:befo
 .yatri-image-properties .yatri-half {
     width: 50%;
     float: left;
+}
+
+.yatri-image-properties .yatri-field-heading {
+    display: inline-block;
+    margin-top: 5px;
 }
 
 .yatri-heading {
@@ -531,6 +536,12 @@ li.customize-control.yatri-open .yatri-actions .action--edit span.dashicons:befo
     /* width: 100%; */
     padding: 5px;
     text-align: center;
+}
+
+.customize-control .yatri-input-alignment {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .customize-control .yatri-input-alignment li {

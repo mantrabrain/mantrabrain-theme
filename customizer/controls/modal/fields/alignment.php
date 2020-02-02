@@ -7,7 +7,7 @@
         $alignment_value = $field_value['value'];
     } else {
 
-        $alignment_value = isset($field['default']) ? $field['default'] : '';
+        $alignment_value = $default_value;
     }
     $options = isset($field['options']) ? $field['options'] : array();
     ?>
@@ -16,7 +16,7 @@
             <?php foreach ($options as $option_key => $option_value) {
                 $icon = isset($option_value['icon']) ? $option_value['icon'] : '';
                 ?>
-                <li data-alignment="<?php echo esc_attr($option_key); ?>"
+                <li data-alignment="<?php echo esc_attr($option_key);?>" <?php echo $option_key == $default_value ? 'data-default="yes"' : ''; ?>
                     class="<?php echo $option_key == $alignment_value ? 'active' : ''; ?>">
                     <div class="alignment-wrap">
                         <span class="<?php echo esc_attr($icon); ?>"></span>

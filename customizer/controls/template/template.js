@@ -120,7 +120,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
+
         yatriTemplateControl.init();
 
     })

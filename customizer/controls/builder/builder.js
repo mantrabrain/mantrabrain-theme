@@ -311,6 +311,7 @@
 
 
     };
+
     $(window).load(function () {
         yatriBuilder.init();
     });

@@ -7,6 +7,7 @@ if (!class_exists('WP_Customize_Control'))
  */
 class Mantrabrain_Theme_Customizer_Control_Builder extends Mantrabrain_Theme_Customizer_Control_Base
 {
+
     public function __construct(WP_Customize_Manager $manager, $id, array $args = array())
     {
 
@@ -28,7 +29,6 @@ class Mantrabrain_Theme_Customizer_Control_Builder extends Mantrabrain_Theme_Cus
     {
 
         $script_uri = YATRI_THEME_URI . 'mantrabrain-theme/customizer/controls/builder/';
-
 
         //wp_enqueue_script('jquery-ui-resizable');
         wp_enqueue_script('yatri-builder-builder-js', $script_uri . 'builder.js', array('jquery', 'jquery-ui-draggable'), YATRI_THEME_VERSION);

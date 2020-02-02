@@ -20,26 +20,36 @@
             </label>
         <?php } ?>
     </div>
+    <?php
+
+    $top_disabled = in_array('top', $disabled_fields) ? 'disabled="disabled"' : '';
+    $right_disabled = in_array('right', $disabled_fields) ? 'disabled="disabled"' : '';
+    $bottom_disabled = in_array('bottom', $disabled_fields) ? 'disabled="disabled"' : '';
+    $left_disabled = in_array('left', $disabled_fields) ? 'disabled="disabled"' : '';
+    ?>
     <div class="yatri--css-ruler yatri--field-inputs">
 		<span>
-					<input type="number" data-field-key="top" class="yatri-input-css yatri-change-by-js margin_top"
-                           value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['top']['value']) : ''; ?>"/>
+					<input <?php echo $top_disabled; ?> type="number" data-field-key="top"
+                                                        class="yatri-input-css yatri-change-by-js margin_top"
+                                                        value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['top']['value']) : ''; ?>"/>
 					<span class="yatri--small-label"><?php echo esc_html__('Top', 'yatri'); ?></span>
 		</span>
         <span>
-        <input type="number" data-field-key="right" class="yatri-input-css yatri-change-by-js margin_right"
-               value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['right']['value']) : ''; ?>"/>
+        <input <?php echo $right_disabled; ?> type="number" data-field-key="right"
+                                              class="yatri-input-css yatri-change-by-js margin_right"
+                                              value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['right']['value']) : ''; ?>"/>
 					<span class="yatri--small-label"><?php echo esc_html__('Right', 'yatri'); ?></span>
 				</span>
         <span>
-					<input type="number" data-field-key="bottom"
-                           class="yatri-input-css yatri-change-by-js margin_bottom"
-                           value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['bottom']['value']) : ''; ?>"/>
+					<input <?php echo $bottom_disabled; ?> type="number" data-field-key="bottom"
+                                                           class="yatri-input-css yatri-change-by-js margin_bottom"
+                                                           value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['bottom']['value']) : ''; ?>"/>
 					<span class="yatri--small-label"><?php echo esc_html__('Bottom', 'yatri'); ?></span>
 				</span>
         <span>
-					<input type="number" data-field-key="left" class="yatri-input-css yatri-change-by-js margin_left"
-                           value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['left']['value']) : ''; ?>"/>
+					<input <?php echo $left_disabled; ?> type="number" data-field-key="left"
+                                                         class="yatri-input-css yatri-change-by-js margin_left"
+                                                         value="<?php echo isset($field_value['top']['value']) ? esc_attr($field_value['left']['value']) : ''; ?>"/>
 					<span class="yatri--small-label"><?php echo esc_html__('Left', 'yatri'); ?></span>
         </span>
         <label

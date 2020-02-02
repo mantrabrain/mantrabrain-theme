@@ -284,8 +284,8 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
                                    name="<?php echo esc_attr($this->get_field_name($field_key)); ?>"
                                    type="<?php echo esc_attr($field['type']); ?>" readonly="readonly"
                                    value="<?php echo esc_attr($value); ?>" <?php echo $extra_attribute_text; ?>/>
-                            <i class="selected-icon fa <?php echo esc_attr($value) ?>"></i>
-                            <i class="toggle-icon fa fa-chevron-down"></i>
+                            <i class="selected-icon fab<?php echo esc_attr($value) ?>"></i>
+                            <i class="toggle-icon fab fa-chevron-down"></i>
 
                             <?php $this->description($field) ?>
                         <div class="mb-icon-list">
@@ -298,7 +298,7 @@ if (!class_exists('Mantrabrain_Theme_Widget_Base')) {
 
                                     $class = $value == $icon_key ? 'active' : '';
 
-                                    echo '<li data-icon="' . esc_attr($icon_key) . '" class="icon ' . esc_attr($class) . '"><i class="fa ' . esc_attr($icon_key) . '"></i></li>';
+                                    echo '<li data-icon="' . esc_attr($icon_key) . '" class="icon ' . esc_attr($class) . '"><i class="fab' . esc_attr($icon_key) . '"></i></li>';
                                 }
                                 ?>
 

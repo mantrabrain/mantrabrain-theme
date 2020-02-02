@@ -17,7 +17,7 @@
 
             <?php foreach ($css_border_styles as $border_key => $border_val) { ?>
                 <option <?php echo isset($border_value['style']) && $border_value['style'] == $border_key ? 'selected="selected"' : ''; ?>
-                        value="<?php echo esc_attr($border_key) ?>"><?php echo esc_html($border_val); ?></option>
+                        value="<?php echo esc_attr($border_key) ?>" <?php echo $border_key == '' ? 'data-default="yes"' : '' ?>><?php echo esc_html($border_val); ?></option>
             <?php } ?>
 
         </select>
@@ -73,8 +73,20 @@
 
 
         </div>
-        <input data-default="#444" type="text" class="yatri-color-picker yatri-change-by-js border_color"
+        <?php
+        $border_color_bg = isset($border_value['border_color']) ? 'background:' . esc_attr($border_value['border_color']) . ';' : '';
+
+        ?>
+        <input data-default="#444" type="text" class="yatri-color-picker yatri-change-by-js border_color hidden"
                value="<?php echo isset($border_value['border_color']) ? esc_attr($border_value['border_color']) : '' ?>"/>
+        <div class="wp-picker-container yatri-picker-container">
+            <button type="button" class="button wp-color-result yatri-picker-result"
+                    style="z-index:9999;background-color: rgb(186, 186, 186); background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==&quot;); position: relative;">
+                <span class="wp-color-result-text"><?php esc_html_e('Select Color', 'yatri'); ?></span>
+                <span class="color-alpha"
+                      style="<?php echo $border_color_bg; ?>width: 30px; height: 28px; position: absolute; top: 0px; left: 0px; border-top-left-radius: 2px; border-bottom-left-radius: 2px;"></span>
+            </button>
+        </div>
     </div>
     <div class="yatri-input-border-radius">
         <div class="yatri-field-header">
@@ -127,8 +139,21 @@
 
 
         </div>
-        <input data-default="#444" type="text" class="yatri-color-picker yatri-change-by-js box_shadow_color"
+        <?php
+        $box_shadow_bg = isset($border_value['box_shadow_color']) ? 'background:' . esc_attr($border_value['box_shadow_color']) . ';' : '';
+
+        ?>
+        <input data-default="#444" type="text" class="yatri-color-picker yatri-change-by-js box_shadow_color hidden"
                value="<?php echo isset($border_value['box_shadow_color']) ? esc_attr($border_value['box_shadow_color']) : '' ?>"/>
+        <div class="wp-picker-container yatri-picker-container">
+            <button type="button" class="button wp-color-result yatri-picker-result"
+                    style="z-index:9999;background-color: rgb(186, 186, 186); background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==&quot;); position: relative;">
+                <span class="wp-color-result-text"><?php esc_html_e('Select Color', 'yatri'); ?></span>
+
+                <span class="color-alpha"
+                      style="<?php echo $box_shadow_bg; ?>width: 30px; height: 28px; position: absolute; top: 0px; left: 0px; border-top-left-radius: 2px; border-bottom-left-radius: 2px;"></span>
+            </button>
+        </div>
     </div>
     <div class="yatri-input-box-shadow-size">
         <div class="yatri-field-header">

@@ -115,7 +115,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
+
 
         yatriRepeater.init();
 

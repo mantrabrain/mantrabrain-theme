@@ -76,7 +76,7 @@
         },
         toRelativeUrl: function (url) {
             return url;
-            
+
         },
         showChangeBtn: function () {
             $(".yatri--add", this.preview).addClass("yatri--hide");
@@ -86,6 +86,12 @@
             $(".yatri--remove", this.preview).removeClass(
                 "yatri--hide"
             );
+
+            var wrap = $(this.preview).closest('.yatri-field-wrap');
+            wrap.find('.yatri-change-by-js.image_size').find('option[value="cover"]').prop('selected', 'selected');
+            wrap.find('.yatri-change-by-js.image_position').find('option[value="center"]').prop('selected', 'selected');
+            wrap.find('.yatri-change-by-js.image_repeat').find('option[value="no-repeat"]').prop('selected', 'selected');
+            wrap.find('.yatri-change-by-js.parallax_image').find('option[value="scroll"]').prop('selected', 'selected').trigger('change');
         },
         insertVideo: function (attachment) {
             if (typeof attachment !== "undefined") {
@@ -204,12 +210,11 @@
         YatriMedia.insertFile(attachment);
     });
 
-
     var yatriModalControl = {
         init: function () {
 
             this.initEvents();
-            this.initColorPicker();
+            //this.initColorPicker();
             this.initMedia();
             this.initTabs();
             this.intRularLink();
@@ -326,6 +331,7 @@
                 _that.updateFontProperty($(this));
 
                 $.each(model.find('.yatri-change-by-js'), function () {
+
                     var field_wrap = $(this).closest('.yatri-field-wrap');
                     var field_type = field_wrap.attr('data-field-type');
                     var field_name = field_wrap.attr('data-field-name');
@@ -437,21 +443,199 @@
 
 
                 });
+
                 var value_string = JSON.stringify(all_field_value_object);
 
                 var result_node = $(this).closest('li.customize-control').find('.yatri--settings-wrapper').find('.yatri-field-settings-inner').find('.yatri_customizer_minified_results');
 
                 result_node.val(value_string).trigger('change');
 
+                _that.setLocalStorate($(this));
                 console.log(value_string);
 
             });
         },
+        setLocalStorate: function ($instance) {
+
+            var _that = this;
+            var field_group = $instance.closest('.yatri--group-field');
+            var field_id = field_group.attr('data-field-id');
+            var css_selector = field_group.attr('data-field-selector');
+            var additional_css_mobile = field_group.attr('data-field-additional-css-mobile');
+            var additional_css_tablet = field_group.attr('data-field-additional-css-tablet');
+            var additional_css_desktop = field_group.attr('data-field-additional-css-desktop');
+            var additional_css_all = field_group.attr('data-field-additional-css-all');
+            var css_property = field_group.attr('data-field-css-property');
+            var wrap = field_group.find('.yatri-field-wrap');
+            var all_css_code_for_js = '';
+            wrap.each(function () {
+                var device = $(this).attr('data-device');
+                var data_field_key = $instance.attr('data-field-key');
+                device = typeof device == undefined || typeof device == "undefined" || '' == device ? 'all' : device;
+
+                var field_type = $(this).attr('data-field-type');
+                var data_field_name = $(this).attr('data-field-name');
+                var devicewise_css_text = '';
+                switch (field_type) {
+                    case "color":
+                        var value = $(this).find('.yatri-change-by-js.yatri-color-picker').val();
+                        devicewise_css_text = '' == value ? '' : css_property.replace("{{value}}", value);
+                        break;
+                    case "overlay":
+                        var value = $(this).find('.yatri-change-by-js.yatri-color-picker').val();
+                        devicewise_css_text = '' == value ? '' : css_property.replace("{{value}}", value);
+                        var selector_array = css_selector.split(",");
+                        css_selector = selector_array.join(':before, ') + ':before';
+                        if ('' == value) {
+                            $('body').find(css_selector).removeClass('yatri-overlay');
+                        } else {
+                            $('body').find(css_selector).addClass('yatri-overlay');
+                        }
+                        break;
+
+                    case "alignment":
+                        var value = $(this).find('.yatri-input-alignment input.yatri-change-by-js').val();
+                        devicewise_css_text = '' == value ? '' : css_property.replace("{{value}}", value);
+                        break;
+                    case "range":
+                        var value = $(this).find('.yatri--slider-input.yatri-change-by-js').val();
+                        var unit = $(this).find('.yatri--css-unit').find('input[name="' + field_type + '_unit"]').val();
+                        if ('' !== value) {
+                            var single_css = css_property.replace("{{value}}", value);
+                            devicewise_css_text += single_css.replace("{{unit}}", unit);
+                        }
+                        break;
+                    case "padding":
+                    case "margin":
+                        var unit = $(this).find('.yatri--css-unit').find('input[name="' + field_type + '_unit"]').val();
+                        var top = $(this).find('input.' + field_type + '_top').val();
+                        var right = $(this).find('input.' + field_type + '_right').val();
+                        var bottom = $(this).find('input.' + field_type + '_bottom').val();
+                        var left = $(this).find('input.' + field_type + '_left').val();
+                        if ('' !== top) {
+                            devicewise_css_text = field_type + '-top:' + top + unit + ';';
+                        }
+                        if ('' !== right) {
+                            devicewise_css_text += field_type + '-right:' + right + unit + ';';
+                        }
+                        if ('' !== bottom) {
+                            devicewise_css_text += field_type + '-bottom:' + bottom + unit + ';';
+                        }
+                        if ('' !== left) {
+                            devicewise_css_text += field_type + '-left:' + left + unit + ';';
+                        }
+
+                        break;
+                    case "border":
+
+                        var border_type = $(this).find('select.border_style').val();
+                        var top = $(this).find('input.border_top').val();
+                        var right = $(this).find('input.border_right').val();
+                        var left = $(this).find('input.border_left').val();
+                        var bottom = $(this).find('input.border_bottom').val();
+                        var border_color = $(this).find('.yatri-change-by-js.yatri-color-picker.border_color').val();
+                        var box_shadow_color = $(this).find('.yatri-change-by-js.yatri-color-picker.box_shadow_color').val();
+                        var radius_top = $(this).find('input.border_radius_top').val();
+                        var radius_right = $(this).find('input.border_radius_right').val();
+                        var radius_bottom = $(this).find('input.border_radius_bottom').val();
+                        var radius_left = $(this).find('input.border_radius_left').val();
+                        var box_shadow_x = $(this).find('input.box_shadow_x').val();
+                        var box_shadow_y = $(this).find('input.box_shadow_y').val();
+                        var box_shadow_blur = $(this).find('input.box_shadow_blur').val();
+                        var box_shadow_spread = $(this).find('input.box_shadow_spread').val();
+                        var box_shadow_inset = $(this).find('input.box_shadow_inset').is(":checked");
+                        if ('' !== border_type) {
+                            devicewise_css_text = "border-style:" + border_type + ";";
+                            devicewise_css_text += "border-top-width:" + top + "px;";
+                            devicewise_css_text += "border-right-width:" + right + "px;";
+                            devicewise_css_text += "border-left-width:" + left + "px;";
+                            devicewise_css_text += "border-bottom-width:" + bottom + "px;";
+                            devicewise_css_text += "border-color:" + border_color + ";";
+                        }
+                        devicewise_css_text += "border-top-left-radius:" + radius_top + "px;";
+                        devicewise_css_text += "border-top-right-radius:" + radius_right + "px;";
+                        devicewise_css_text += "border-bottom-right-radius:" + radius_bottom + "px;";
+                        devicewise_css_text += "border-bottom-left-radius:" + radius_left + "px;";
+
+
+                        var box_shadow_inset_text = "";
+                        if (box_shadow_inset) {
+                            box_shadow_inset_text = "inset ";
+                        }
+                        var box_shadow = "box-shadow:" + box_shadow_inset_text + box_shadow_x + "px " + box_shadow_y + "px " + box_shadow_y + "px " + box_shadow_spread + "px " + box_shadow_color + ";";
+                        devicewise_css_text += box_shadow;
+
+
+                        break;
+                    case "image":
+                        var url = $(this).find('.attachment-url').val();
+                        var image_size = $(this).find('select.image_size').val();
+                        var image_position = $(this).find('select.image_position').val();
+                        var image_repeat = $(this).find('select.image_repeat').val();
+                        var parallax_image = $(this).find('select.parallax_image').val();
+
+                        devicewise_css_text = 'background-size: ' + image_size + ';\n' +
+                            '    background-image: url(' + url + ');\n' +
+                            '    background-repeat: ' + image_repeat + ';\n' +
+                            '    background-position: ' + image_position + ';\n' +
+                            '    background-attachment: ' + parallax_image + ';'
+
+
+                        break;
+
+                }
+                all_css_code_for_js += _that.getResponsive(devicewise_css_text, device, css_selector);
+            });
+            var all_additional_css_code = '';
+            all_additional_css_code += _that.getResponsive(additional_css_mobile, 'mobile');
+            all_additional_css_code += _that.getResponsive(additional_css_tablet, 'tablet');
+            all_additional_css_code += _that.getResponsive(additional_css_desktop, 'desktop');
+            all_additional_css_code += additional_css_all;
+            var object = {
+
+                css_code: all_css_code_for_js,
+                additional_css: all_additional_css_code,
+                field_id: field_id
+            };
+            window.localStorage.removeItem("yatriCustomizerChanges");
+
+            window.localStorage.setItem("yatriCustomizerChanges", JSON.stringify(object));
+
+        },
+        getResponsive: function (css, device, selector) {
+            if (css == '' || typeof css != 'string' || typeof device == "undefined" || '' == device || typeof device == undefined) {
+                return '';
+            }
+
+            var css_code = typeof selector == "string" && '' !== selector ? selector + ' { ' + css + ' }' : css;
+            if (device == 'all') {
+                return css_code;
+            }
+
+            var all_css = '';
+            switch (device) {
+                case "mobile":
+                    all_css = "@media screen and (max-width: 568px) {" + css_code + "}";
+                    break;
+                case "tablet":
+                    all_css = "@media screen and (min-width: 569px) and (max-width: 1024px) {" + css_code + "}";
+                    break;
+                case "desktop":
+                    all_css = "@media screen and (min-width: 1025px) {" + css_code + "}";
+                    break;
+                default:
+                    all_css = css_code;
+                    break;
+            }
+            return all_css;
+
+        },
+
         updateRularValue: function (__obj) {
             if (__obj.closest(".yatri--css-ruler").length > 0) {
                 if (__obj.closest(".yatri--css-ruler").find('.yatri--css-ruler-link').hasClass('yatri--label-active')) {
                     var val = __obj.val();
-                    __obj.closest(".yatri--css-ruler").find('input[type="number"]').val(val);
+                    __obj.closest(".yatri--css-ruler").find('input[type="number"]:enabled').val(val);
                 }
             }
         },
@@ -478,7 +662,7 @@
             var subset = new Array();
             var varient_html = $('<select/>');
             var subset_html = $('<div/>');
-
+            varient_html.append('<option value="" data-default="yes">Theme Default</option>');
             if (yatriAllFonts["google"][current_selected_font] !== undefined) {
 
                 var varient = typeof yatriAllFonts["google"][current_selected_font]["variants"] !== undefined ? yatriAllFonts["google"][current_selected_font]["variants"] : new Array();
@@ -489,6 +673,7 @@
 
                     subset_html.append('<p><label><input type="checkbox" data-field-key="value" class="yatri-typo-input yatri-change-by-js" name="' + language_field + '_' + subi + '" value="' + subset[subi] + '">' + subset[subi] + '</label></p>');
                 }
+
 
                 for (var vari = 0; vari < varient.length; vari++) {
 
@@ -513,6 +698,7 @@
 
         },
         initEvents: function () {
+            var _that = this;
             $document.on("click", ".yatri--settings-fields .action--edit", function (e) {
                 e.preventDefault();
 
@@ -524,6 +710,58 @@
                     control_wrap.removeClass('yatri-open');
                 }
             });
+
+            $document.on("click", ".yatri--settings-fields .action--reset", function (e) {
+                var confirm_box = confirm("Are you sure want to reset this settings ?");
+                if (confirm_box !== true) {
+                    return;
+                }
+
+                e.preventDefault();
+
+                var modal_wrap = $(this).closest('li.customize-control').find('.yatri-modal-settings');
+                modal_wrap.find('.yatri-field-wrap').each(function () {
+                    var field_type = $(this).attr("data-field-type");
+                    var input_field = $(this).find('.yatri-change-by-js');
+                    switch (field_type) {
+                        case "font":
+                        case "font_weight":
+                        case "select":
+                            input_field.find('option[data-default="yes"]').prop('selected', 'selected');
+                            break;
+                        case "range":
+                            input_field = $(this).find('.yatri-change-by-js.yatri--slider-input');
+                            input_field.val("");
+                            break;
+                        case "color":
+                        case "overlay":
+                            input_field = $(this).find('.yatri-change-by-js.yatri-color-picker');
+                            $(this).find('.color-alpha').css({'background': 'none'});
+                            input_field.val("");
+                            break;
+                        case "padding":
+                        case "margin":
+                            input_field = $(this).find('.yatri-change-by-js.yatri-input-css');
+                            input_field.val("");
+                            break;
+                        case "border":
+                            $(this).find('.yatri-change-by-js.yatri-color-picker').val("");
+                            $(this).find('.color-alpha').css({'background': 'none'});
+                            $(this).find('.yatri-change-by-js.yatri-input-css').val("");
+                            $(this).find('.yatri-change-by-js.box_shadow_inset').prop('checked', false);
+                            $(this).find('option[data-default="yes"]').prop('selected', 'selected');
+                            break;
+                        case "image":
+                            $(this).find('.button.yatri--remove').trigger('click');
+                            break;
+                        case "alignment":
+                            $(this).find('li[data-default="yes"]').trigger('click');
+                            break;
+                    }
+                    $(this).find('.yatri-change-by-js').trigger('change');
+                });
+                $(this).closest('.yatri--settings-fields').find('input.yatri_customizer_minified_results').trigger('change');
+            });
             $document.on("click", ".yatri-devices button", function (e) {
                 e.preventDefault();
                 var device = $(this).attr("data-device") || "";
@@ -534,6 +772,15 @@
                     '"]'
                 ).trigger("click");
             });
+
+            // initColorPicker
+            $document.on('click', '.yatri-picker-result', function () {
+
+                var dummy_container = $(this).closest('.yatri-picker-container').hide();
+                _that.initColorPicker($(this).closest('.yatri-input-color'), dummy_container);
+
+            });
+
         },
         initMedia: function ($el) {
             // When add/Change
@@ -557,40 +804,43 @@
                 YatriMedia.remove(p);
             });
         },
-        initColorPicker: function () {
+        initColorPicker: function (colorInput, dummy_container) {
 
-            $.each($('.yatri-input-color'), function () {
-                var colorInput = $(this);
-                var df = colorInput.data("default") || "";
-                var current_val = $(
-                    ".yatri-color-picker",
-                    colorInput
-                ).val();
-                // data-alpha="true"
-                $(".yatri-color-picker", colorInput).attr(
-                    "data-alpha",
-                    "true"
-                );
-                $(".yatri-color-picker", colorInput).wpColorPicker({
-                    defaultColor: df,
-                    change: function (event, ui) {
-                        var new_color = ui.color.toString();
-                        $(".yatri-color-picker", colorInput).val(new_color);
-                        if (ui.color.toString() !== current_val) {
-                            current_val = new_color;
-                            $(".yatri-color-picker", colorInput).trigger(
-                                "change"
-                            );
-                        }
-                    },
-                    clear: function (event, ui) {
-                        $(".yatri-color-picker", colorInput).val("");
+            //$.each($('.yatri-input-color'), function () {
+            //var colorInput = $(this);
+            var df = colorInput.data("default") || "";
+            var current_val = $(
+                ".yatri-color-picker",
+                colorInput
+            ).val();
+            // data-alpha="true"
+            $(".yatri-color-picker", colorInput).attr(
+                "data-alpha",
+                "true"
+            );
+            $(".yatri-color-picker", colorInput).wpColorPicker({
+                defaultColor: df,
+                change: function (event, ui) {
+                    var new_color = ui.color.toString();
+                    $(".yatri-color-picker", colorInput).val(new_color);
+                    if (ui.color.toString() !== current_val) {
+                        current_val = new_color;
                         $(".yatri-color-picker", colorInput).trigger(
-                            "data-change"
+                            "change"
                         );
                     }
-                });
+                },
+                clear: function (event, ui) {
+                    $(".yatri-color-picker", colorInput).val("");
+                    $(".yatri-color-picker", colorInput).trigger(
+                        "data-change"
+                    );
+                }
             });
+            dummy_container.remove();
+            colorInput.find('button.wp-color-result').trigger('click');
+            colorInput.find("input.yatri-color-picker").removeClass('hidden');
+            //});
             /*$('.yatri-color-picker').wpColorPicker({
                 change: function (event, ui) {
                     var element = event.target;
@@ -642,9 +892,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
         yatriModalControl.init();
-
-    })
+    });
 
 })(jQuery, wp.customize || null);

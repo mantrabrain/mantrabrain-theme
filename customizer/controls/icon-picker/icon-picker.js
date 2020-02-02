@@ -119,7 +119,7 @@
                     var icon_prefix = '';
                     switch (icon_key) {
                         case "font_awesome":
-                            icon_prefix = "fa ";
+
                             break;
                     }
                     if (typeof icon_key != undefined) {
@@ -146,7 +146,8 @@
 
 
     };
-    $document.ready(function () {
+    wp.customize.bind('ready', function () {
+
         yatriIconPicker.init();
 
     })

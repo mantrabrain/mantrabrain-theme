@@ -15,7 +15,7 @@ class Mantrabrain_Theme_Customizer_Control_Base extends WP_Customize_Control
      */
     public $description = '';
 
-    public function field_header()
+    public function field_header($icon = '')
     {
         echo '<div class="yatri-field-header">';
         if (!empty($this->label)) {
@@ -24,26 +24,23 @@ class Mantrabrain_Theme_Customizer_Control_Base extends WP_Customize_Control
         if (!empty($this->description)) {
             echo '<span class="description customize-control-description">' . esc_html($this->description) . '</span>';
         }
+        if (!empty($icon)) {
+            echo '<span class="' . esc_attr($icon) . '"></span>';
+        }
         echo '</div>';
 
     }
 
-    public function device_selector()
+    public function device_selector($devices = array('desktop', 'tablet', 'mobile'))
     {
         ?>
         <div class="devices yatri-devices">
-            <button type="button" class="preview-desktop active" aria-pressed="true"
-                    data-device="desktop">
-                <span class="screen-reader-text"><?php echo esc_html__('Enter desktop preview mode', 'yatri'); ?></span>
-            </button>
-            <button type="button" class="preview-tablet" aria-pressed="false"
-                    data-device="tablet">
-                <span class="screen-reader-text"><?php echo esc_html__('Enter tablet preview mode', 'yatri'); ?></span>
-            </button>
-            <button type="button" class="preview-mobile" aria-pressed="false"
-                    data-device="mobile">
-                <span class="screen-reader-text"><?php echo esc_html__('Enter mobile preview mode', 'yatri'); ?></span>
-            </button>
+            <?php foreach ($devices as $device) { ?>
+                <button type="button" class="preview-<?php echo esc_attr($device) ?> active" aria-pressed="true"
+                        data-device="<?php echo esc_attr($device) ?>">
+                    <span class="screen-reader-text"><?php echo sprintf(esc_html__('Enter %s preview mode', 'yatri'), $device); ?></span>
+                </button>
+            <?php } ?>
         </div>
         <?php
     }
@@ -51,7 +48,7 @@ class Mantrabrain_Theme_Customizer_Control_Base extends WP_Customize_Control
     public function device_template_wrap_start($device = 'desktop')
     {
         ?>
-        <div class="yatri-field-settings-inner yatri--for-<?php echo esc_attr($device) ?>"
+    <div class="yatri-field-settings-inner yatri--for-<?php echo esc_attr($device) ?>"
          data-for-device="<?php echo esc_attr($device); ?>">
         <?php
     }

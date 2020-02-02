@@ -22,7 +22,7 @@
     background: #fff;
     cursor: move;
     position: relative;
-    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 .yatri-builder-control .yatri-builder-sections .item.disabled {
@@ -61,11 +61,17 @@
 }
 
 .yatri-builder-control .yatri-builder-sections {
-    display: inline-block;
+    display: block;
     padding: 5px;
     background: #fff;
     border: 1px solid #ddd;
     border-top: 0;
+}
+
+.yatri-builder-control .yatri-builder-sections:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .yatri-builder-control .yatri-builder-drop-area {
